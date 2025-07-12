@@ -12,11 +12,12 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/uuid": "^10.0.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vite": "^7.0.4"
   },
   "scripts": {
-    "start": "echo 'Run your development server command here, e.g., vite or react-scripts start'",
-    "build": "echo 'Run your build command here, e.g., vite build or react-scripts build'",
-    "test": "echo 'Run your test command here'"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   }
 }

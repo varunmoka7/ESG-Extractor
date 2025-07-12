@@ -6,9 +6,10 @@ import KpiDisplay from './KpiDisplay';
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
 import PerformanceReportDisplay from './PerformanceReportDisplay';
-import { extractESGMetrics, generatePerformanceReport } from '../services/geminiService';
+import { extractESGMetrics } from '../services/extractorService';
 import { ExtractedESGData, PerformanceReportData, ReportFileInput } from '../types';
 import { DEFAULT_ERROR_MESSAGE } from '../constants';
+import { generatePerformanceReport } from '../services/geminiService';
 
 const InitialStateMessageV1: React.FC = () => (
   <div className="mt-8 bg-white dark:bg-slate-800 p-8 rounded-xl shadow-xl dark:shadow-slate-700/50 text-center">
@@ -58,8 +59,8 @@ const EsgExtractorV1Page: React.FC = () => {
     setErrorReport(null);
 
     try {
-      // Pass both text and images to the extraction service
-      const kpis = await extractESGMetrics(reportData.text, reportData.images);
+      // Use standard ESG extractor
+      const kpis = await extractESGMetrics(reportData.text, 'standard');
       setExtractedKpis(kpis);
     } catch (err) {
       if (err instanceof Error) {

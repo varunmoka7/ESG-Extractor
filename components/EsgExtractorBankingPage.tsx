@@ -6,7 +6,8 @@ import BankingKpiDisplay from './BankingKpiDisplay';
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
 import PerformanceReportDisplay from './PerformanceReportDisplay'; 
-import { extractBankingESGMetrics, generatePerformanceReport } from '../services/geminiService';
+import { extractESGMetrics } from '../services/extractorService';
+import { generatePerformanceReport } from '../services/geminiService';
 import { ExtractedBankingData, PerformanceReportData, ReportFileInput } from '../types';
 import { DEFAULT_ERROR_MESSAGE } from '../constants';
 
@@ -58,8 +59,8 @@ const EsgExtractorBankingPage: React.FC = () => {
     setErrorReport(null);
 
     try {
-      // V3 extractor is text-only for now, so we pass reportData.text
-      const kpis = await extractBankingESGMetrics(reportData.text);
+      // Use banking extractor
+      const kpis = await extractESGMetrics(reportData.text, 'banking');
       setExtractedBankingKpis(kpis);
     } catch (err) {
       if (err instanceof Error) {

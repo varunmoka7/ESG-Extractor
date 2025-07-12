@@ -6,7 +6,8 @@ import LeverKpiDisplay from './LeverKpiDisplay';
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
 import PerformanceReportDisplay from './PerformanceReportDisplay'; 
-import { extractLeverBasedESGMetrics, generatePerformanceReport } from '../services/geminiService';
+import { extractESGMetrics } from '../services/extractorService';
+import { generatePerformanceReport } from '../services/geminiService';
 import { ExtractedLeverData, PerformanceReportData, ReportFileInput } from '../types';
 import { DEFAULT_ERROR_MESSAGE } from '../constants';
 
@@ -59,8 +60,8 @@ const EsgExtractorV2Page: React.FC = () => {
     setErrorReport(null);
 
     try {
-      // V2 extractor is text-only for now, so we pass reportData.text
-      const kpis = await extractLeverBasedESGMetrics(reportData.text);
+      // Use carbon levers extractor
+      const kpis = await extractESGMetrics(reportData.text, 'levers');
       setExtractedLeverKpis(kpis);
     } catch (err) {
       if (err instanceof Error) {

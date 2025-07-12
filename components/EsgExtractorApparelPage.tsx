@@ -6,7 +6,8 @@ import ApparelKpiDisplay from './ApparelKpiDisplay';
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
 import PerformanceReportDisplay from './PerformanceReportDisplay';
-import { extractApparelESGMetrics, generatePerformanceReport } from '../services/geminiService';
+import { extractESGMetrics } from '../services/extractorService';
+import { generatePerformanceReport } from '../services/geminiService';
 import { ExtractedApparelData, PerformanceReportData, ReportFileInput } from '../types';
 import { DEFAULT_ERROR_MESSAGE }
 from '../constants';
@@ -59,8 +60,8 @@ const EsgExtractorApparelPage: React.FC = () => {
     setErrorReport(null);
 
     try {
-      // Apparel extractor is text-only for now, so we pass reportData.text
-      const kpis = await extractApparelESGMetrics(reportData.text);
+      // Use apparel extractor
+      const kpis = await extractESGMetrics(reportData.text, 'apparel');
       setExtractedApparelKpis(kpis);
     } catch (err) {
       if (err instanceof Error) {

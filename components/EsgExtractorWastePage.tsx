@@ -5,7 +5,8 @@ import WasteKpiDisplay from './WasteKpiDisplay'; // New display component
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
 import PerformanceReportDisplay from './PerformanceReportDisplay'; 
-import { extractWasteESGMetrics, generatePerformanceReport } from '../services/geminiService'; // New extraction service
+import { extractESGMetrics } from '../services/extractorService';
+import { generatePerformanceReport } from '../services/geminiService';
 import { ExtractedWasteData, PerformanceReportData, ReportFileInput } from '../types'; // New data types
 import { DEFAULT_ERROR_MESSAGE } from '../constants';
 
@@ -57,8 +58,8 @@ const EsgExtractorWastePage: React.FC = () => {
     setErrorReport(null);
 
     try {
-      // Waste extractor is text-only for now, consistent with other lever-based extractors
-      const kpis = await extractWasteESGMetrics(reportData.text);
+      // Use waste extractor
+      const kpis = await extractESGMetrics(reportData.text, 'waste');
       setExtractedWasteKpis(kpis);
     } catch (err) {
       if (err instanceof Error) {
