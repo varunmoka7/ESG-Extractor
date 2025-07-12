@@ -13,25 +13,20 @@ export interface ReportFileInput {
 }
 
 export interface KPI {
-  id: string; // For React keys
   name: string;
-  value: string | number;
-  metric_type: string; 
-  year?: number | string;
-  reference?: string; 
-
-  // New detailed fields for V1 Standard Extractor enhancement
-  category_detail?: string;       // e.g., "GHG Scope 1 Emissions", "Employee Training Hours"
-  target_value?: string | number; // e.g., "50% reduction", "100,000 tCO2e"
-  target_year?: number | string;  // e.g., 2030
-  baseline_value?: string | number; // e.g., "200,000 tCO2e"
-  baseline_year?: number | string;  // e.g., 2019
-  policy_name?: string;           // e.g., "Sustainable Sourcing Policy"
-  commitment_description?: string;// e.g., "Net Zero by 2050"
-  methodology_standards?: string; // e.g., "GRI Standards", "GHG Protocol"
-  data_assurance?: string;        // e.g., "Externally assured by PwC"
-  scope_boundary_details?: string;// e.g., "Scope 1 & 2 Market-Based"
-  qualitative_notes?: string;     // e.g., "Reduction due to new tech implemented"
+  value: string;
+  metric_type: string;
+  year: number;
+  reference: string;
+  confidence_score?: number;
+  confidence_reasoning?: string;
+  quality_flags?: string[];
+  validation_status?: 'valid' | 'warning' | 'error';
+  // Traceability fields
+  source_text?: string; // The exact sentence or paragraph from which the metric was extracted
+  source_file?: string; // The file name or URL of the source document
+  source_page?: number; // The page number in the source document (if applicable)
+  extraction_timestamp?: string; // ISO timestamp of when the metric was extracted
 }
 
 export interface GeminiKPI { // The structure Gemini is asked to return
