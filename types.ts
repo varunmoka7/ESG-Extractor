@@ -347,9 +347,9 @@ export type ExtractedWasteData = {
     carbon_treatment_analysis?: {
         landfill_carbon?: EnhancedWasteMetric[];
         incineration_carbon?: EnhancedWasteMetric[];
-        recycling_carbon?: GeminiEnhancedWasteMetric[];
-        composting_carbon?: GeminiEnhancedWasteMetric[];
-        wastewater_carbon?: GeminiEnhancedWasteMetric[];
+        recycling_carbon?: EnhancedWasteMetric[];
+        composting_carbon?: EnhancedWasteMetric[];
+        wastewater_carbon?: EnhancedWasteMetric[];
     };
     scope_emissions_waste?: {
         scope_1?: EnhancedWasteScopeEmissionMetric[];
@@ -387,6 +387,280 @@ export interface PerformanceReportData {
   categoryRatings: PerformanceCategoryRating[];
   overallAnalysis: string; 
   generatedDate: string; 
+}
+
+// Multi-Stage Processing Types
+export interface ProcessingStage {
+  process(content: string, metadata: any): Promise<{ data: KpiData[]; confidence?: number }>;
+}
+
+export interface ProcessingResult {
+  success: boolean;
+  data: KpiData[];
+  metadata: {
+    processingTime: number;
+    stagesExecuted: Array<{
+      name: string;
+      success: boolean;
+      processingTime: number;
+    }>;
+    errors: Array<{
+      stage: string;
+      error: string;
+      timestamp: string;
+    }>;
+    warnings: string[];
+  };
+  confidence: number;
+  traceability: TraceabilityInfo;
+}
+
+// Framework Intelligence Types
+export interface FrameworkMapping {
+  kpiId: string;
+  frameworkId: string;
+  frameworkName: string;
+  matchedMetrics: Array<{
+    id: string;
+    name: string;
+    confidence: number;
+  }>;
+  complianceStatus: 'compliant' | 'partial' | 'non-compliant';
+}
+
+export interface ComplianceScore {
+  overall: number;
+  byFramework: Record<string, number>;
+  recommendations: string[];
+}
+
+// ML QA Types
+export interface QaResult {
+  isValid: boolean;
+  confidence: number;
+  issues: QaIssue[];
+  suggestions: string[];
+  modelUsed: string;
+}
+
+export interface QaIssue {
+  type: 'outlier' | 'consistency' | 'format' | 'range' | 'custom';
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  message: string;
+  field?: string;
+  expectedValue?: any;
+  actualValue?: any;
+  confidence: number;
+}
+
+export interface QaCorrection {
+  id: string;
+  originalKpi: KpiData;
+  correctedKpi: KpiData;
+  reason: string;
+  modelsInvolved: string[];
+  timestamp: Date;
+  userFeedback?: string;
+}
+
+export interface ValidationRule {
+  type: 'range' | 'format' | 'presence' | 'consistency';
+  value: any;
+  message: string;
+}
+
+// Performance Monitoring Types
+export interface PerformanceMetrics {
+  overallStats: {
+    totalProcessed: number;
+    successfulProcessed: number;
+    failedProcessed: number;
+    averageProcessingTime: number;
+    totalProcessingTime: number;
+    errorRate: number;
+    throughput: number;
+    lastUpdated: Date;
+  };
+  stagePerformance: Array<{
+    stageName: string;
+    totalExecutions: number;
+    successfulExecutions: number;
+    averageDuration: number;
+    totalDuration: number;
+    errorRate: number;
+    lastExecution: Date;
+  }>;
+  systemHealth: SystemHealth;
+  errorLogs: ErrorLog[];
+  generatedAt: Date;
+}
+
+export interface SystemHealth {
+  status: 'healthy' | 'warning' | 'critical' | 'unknown';
+  cpuUsage: number;
+  memoryUsage: number;
+  activeConnections: number;
+  queueSize: number;
+  lastUpdated: Date;
+}
+
+export interface ErrorLog {
+  id: string;
+  timestamp: Date;
+  stage: string;
+  error: string;
+  metadata: Record<string, any>;
+}
+
+// Intelligent Ingestion Types
+export type FileType = 'pdf' | 'excel' | 'xbrl' | 'html' | 'text' | 'unknown';
+
+export interface IngestionResult {
+  success: boolean;
+  data: KpiData[];
+  metadata: {
+    fileType: FileType;
+    fileName: string;
+    fileSize: number;
+    processingTime: number;
+    parserUsed: string;
+    confidence: number;
+    contentAnalysis?: ContentAnalysis;
+    error?: string;
+  };
+  confidence: number;
+  traceability: TraceabilityInfo;
+}
+
+export interface ContentAnalysis {
+  language: string;
+  keyPhrases: string[];
+  topics: string[];
+  sentiment: 'positive' | 'negative' | 'neutral';
+  wordCount: number;
+  characterCount: number;
+  hasNumbers: boolean;
+  hasTables: boolean;
+  hasCharts: boolean;
+}
+
+// Compliance Scoring Types
+export interface ComplianceReport {
+  assessments: Array<{
+    frameworkId: string;
+    frameworkName: string;
+    overallScore: number;
+    categoryScores: Record<string, number>;
+    requirementScores: Record<string, number>;
+    gaps: Array<{
+      requirementId: string;
+      requirementName: string;
+      categoryId: string;
+      severity: 'low' | 'medium' | 'high' | 'critical';
+      description: string;
+      impact: string;
+      remediation: string;
+      estimatedEffort: 'low' | 'medium' | 'high';
+    }>;
+    strengths: string[];
+    recommendations: string[];
+    lastUpdated: Date;
+  }>;
+  overallScore: number;
+  generatedAt: Date;
+  summary: {
+    totalFrameworks: number;
+    averageScore: number;
+    criticalGaps: number;
+    highPriorityGaps: number;
+  };
+}
+
+// Advanced Carbon Analysis Types
+export interface CarbonAnalysis {
+  metrics: Array<{
+    id: string;
+    name: string;
+    value: number;
+    unit: string;
+    year: number;
+    scope: 1 | 2 | 3;
+    category: string;
+    source: string;
+    confidence: number;
+    methodology: string;
+  }>;
+  calculation: {
+    scope1Emissions: number;
+    scope2Emissions: number;
+    scope3Emissions: number;
+    totalEmissions: number;
+    intensityMetrics: {
+      revenueIntensity: number;
+      productionIntensity: number;
+      employeeIntensity: number;
+      energyIntensity: number;
+    };
+    breakdown: {
+      bySource: Record<string, number>;
+      byCategory: Record<string, number>;
+      byLocation: Record<string, number>;
+      byBusinessUnit: Record<string, number>;
+    };
+    uncertainty: number;
+  };
+  scenarios: Array<{
+    id: string;
+    name: string;
+    description: string;
+    assumptions: Record<string, any>;
+    projectedEmissions: number;
+    reductionPotential: number;
+    costEstimate: number;
+    timeline: number;
+    confidence: number;
+  }>;
+  trends: Array<{
+    period: string;
+    emissions: number;
+    intensity: number;
+    growthRate: number;
+    trendDirection: 'increasing' | 'decreasing' | 'stable';
+    confidence: number;
+  }>;
+  benchmark?: {
+    industry: string;
+    peerGroup: string;
+    averageEmissions: number;
+    bestInClass: number;
+    percentile: number;
+    gap: number;
+    recommendations: string[];
+  };
+  insights: string[];
+  recommendations: string[];
+  generatedAt: Date;
+}
+
+// Enhanced KPI Data with Traceability
+export interface KpiData {
+  id: string;
+  name: string;
+  value: number;
+  unit: string;
+  year: number;
+  category: string;
+  description?: string;
+  source?: string;
+  confidence?: number;
+  traceability: TraceabilityInfo;
+}
+
+export interface TraceabilityInfo {
+  sourceText: string;
+  sourceFile: string;
+  page: number;
+  timestamp: string;
 }
 
 declare global {
