@@ -168,7 +168,7 @@ const KnowledgePage: React.FC = () => {
             
             <div className="space-y-6">
               <div className="border-l-4 border-purple-500 pl-4">
-                <h3 className="text-xl font-semibold text-gray-900">Google Generative AI (@google/genai) - Enhanced</h3>
+                <h3 className="text-xl font-semibold text-gray-900">Google Generative AI (@google/genai)</h3>
                 <p className="text-gray-600 mt-2">
                   Official Google AI SDK for integrating Gemini models with structured 
                   prompting and response handling for ESG data extraction.
@@ -215,107 +215,6 @@ const KnowledgePage: React.FC = () => {
                       <li>• Governance intelligence</li>
                       <li>• Material recovery metrics</li>
                       <li>• Regulatory compliance</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          {/* AI Engine Enhancements - Phase 1 */}
-          <section className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-              <span className="bg-red-100 text-red-800 p-2 rounded-lg mr-4">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </span>
-              AI Engine Enhancements (Phase 1)
-            </h2>
-            
-            <div className="space-y-6">
-              <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-6 mb-6">
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  <strong>Phase 1 enhancements provide enterprise-grade AI processing with 40-50% accuracy improvement, confidence scoring, and robust error handling.</strong>
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div className="border-l-4 border-red-500 pl-4">
-                    <h3 className="text-xl font-semibold text-gray-900">Advanced Prompt Engineering</h3>
-                    <p className="text-gray-600 mt-2">
-                      Enhanced prompts using chain-of-thought reasoning, few-shot learning, and role-based prompting for superior extraction accuracy.
-                    </p>
-                    <ul className="text-sm text-gray-500 mt-2 space-y-1">
-                      <li>• Chain-of-Thought (CoT) reasoning</li>
-                      <li>• Role-based expert prompting</li>
-                      <li>• Few-shot learning examples</li>
-                      <li>• Constraint-based validation</li>
-                    </ul>
-                  </div>
-
-                  <div className="border-l-4 border-orange-500 pl-4">
-                    <h3 className="text-xl font-semibold text-gray-900">Confidence Scoring System</h3>
-                    <p className="text-gray-600 mt-2">
-                      0-100 confidence scale with detailed reasoning for data quality assessment and user transparency.
-                    </p>
-                    <ul className="text-sm text-gray-500 mt-2 space-y-1">
-                      <li>• 0-100 confidence scale</li>
-                      <li>• Detailed reasoning for scores <70</li>
-                      <li>• Quality flags and warnings</li>
-                      <li>• Validation status tracking</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="border-l-4 border-yellow-500 pl-4">
-                    <h3 className="text-xl font-semibold text-gray-900">Robust Error Handling</h3>
-                    <p className="text-gray-600 mt-2">
-                      Multi-model retry logic with graceful degradation and comprehensive validation for enterprise reliability.
-                    </p>
-                    <ul className="text-sm text-gray-500 mt-2 space-y-1">
-                      <li>• 3-attempt retry logic</li>
-                      <li>• Model fallback (1.5-pro → pro)</li>
-                      <li>• Response quality validation</li>
-                      <li>• Graceful degradation</li>
-                    </ul>
-                  </div>
-
-                  <div className="border-l-4 border-green-500 pl-4">
-                    <h3 className="text-xl font-semibold text-gray-900">Data Validation Framework</h3>
-                    <p className="text-gray-600 mt-2">
-                      Comprehensive validation including unit consistency, range checking, and temporal validation.
-                    </p>
-                    <ul className="text-sm text-gray-500 mt-2 space-y-1">
-                      <li>• Unit validation by category</li>
-                      <li>• Reasonable range checking</li>
-                      <li>• Temporal consistency</li>
-                      <li>• Duplicate detection</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-blue-50 rounded-lg p-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Enhanced KPI Structure</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">New Fields Added:</h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• confidence_score: 0-100 scale</li>
-                      <li>• confidence_reasoning: Detailed explanation</li>
-                      <li>• quality_flags: Array of issues</li>
-                      <li>• validation_status: valid/warning/error</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">Metadata Added:</h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• total_metrics_found: Count</li>
-                      <li>• average_confidence: Score</li>
-                      <li>• validation_errors: Error count</li>
-                      <li>• warnings: Warning count</li>
                     </ul>
                   </div>
                 </div>
