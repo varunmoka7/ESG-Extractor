@@ -2,7 +2,7 @@
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 
-export type PageView = 'landing' | 'v1' | 'v2' | 'v3' | 'apparel' | 'waste' | 'methodology' | 'tech_docs'; 
+export type PageView = 'landing' | 'v1' | 'v2' | 'v3' | 'apparel' | 'waste' | 'methodology' | 'tech_docs' | 'knowledge'; 
 
 interface HeaderProps {
   currentPage: PageView;
@@ -96,6 +96,13 @@ const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               aria-current={currentPage === 'tech_docs' ? 'page' : undefined}
             >
               Tech Docs
+            </button>
+             <button
+              onClick={() => onNavigate('knowledge')}
+              className={navLinkClasses('knowledge')}
+              aria-current={currentPage === 'knowledge' ? 'page' : undefined}
+            >
+              Knowledge
             </button>
           </nav>
           <button

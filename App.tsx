@@ -8,7 +8,8 @@ import EsgExtractorBankingPage from './components/EsgExtractorBankingPage';
 import EsgExtractorApparelPage from './components/EsgExtractorApparelPage';
 import EsgExtractorWastePage from './components/EsgExtractorWastePage'; 
 import MethodologyPage from './components/MethodologyPage'; // New import
-import TechnicalDocumentationPage from './components/TechnicalDocumentationPage'; 
+import TechnicalDocumentationPage from './components/TechnicalDocumentationPage';
+import KnowledgePage from './components/KnowledgePage'; 
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageView>('landing'); 
@@ -31,6 +32,7 @@ const App: React.FC = () => {
         {currentPage === 'waste' && <div className="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl"><EsgExtractorWastePage /></div>}
         {currentPage === 'methodology' && <div className="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl"><MethodologyPage /></div>}
         {currentPage === 'tech_docs' && <div className="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl"><TechnicalDocumentationPage /></div>}
+        {currentPage === 'knowledge' && <KnowledgePage />}
       </main>
       <footer className="bg-slate-900 dark:bg-black/50 text-slate-300 dark:text-slate-400 text-center p-5 text-sm border-t border-slate-700 dark:border-slate-800">
         <p>&copy; {new Date().getFullYear()} ESG Metrics Extractor. AI-driven insights.</p>
